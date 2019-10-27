@@ -71,6 +71,13 @@ public class HashTable<V> {
 	}
 
 	public boolean contains(V value, int key) {
+		HashObject<V> element = new HashObject<V>(value, key);
+		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
+			int index = getHash(key, this.numProbes);
+			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -114,7 +121,7 @@ public class HashTable<V> {
 	}
 
 	public int size() {
-		return 0;
+		return this.size;
 	}
 
 	public boolean isEmpty() {
