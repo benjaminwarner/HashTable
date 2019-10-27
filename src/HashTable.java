@@ -8,32 +8,29 @@ public class HashTable<V> {
 	private int size;
 	private int maxSize;
 
-	private final int DEFAULT_CAPACITY = 50;
+	private final int DEFAULT_CAPACITY = 13;
 	private final float DEFAULT_LOAD_FACTOR = .75;
 	private final OpenAddressType DEFAULT_TYPE = OpenAddressType.linear;
 
 	public HashTable() {
-		this.capacity = DEFAULT_CAPACITY;
-		this.loadFactor = DEFAULT_LOAD_FACTOR;
-		this.type = DEFAULT_TYPE;
+		this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR, DEFAULT_TYPE);
 	}
 
 	public HashTable(int capacity) {
-		this.capacity = capacity;
-		this.loadFactor = DEFAULT_LOAD_FACTOR;
-		this.type = DEFAULT_TYPE;
+		this(capacity, DEFAULT_LOAD_FACTOR, DEFAULT_TYPE);
 	}
 
 	public HashTable(int capacity, float loadFactor) {
-		this.capacity = capacity;
-		this.loadFactor = loadFactor;
-		this.type = DEFAULT_TYPE;
+		this(capacity, loadFactor, DEFAULT_TYPE);
 	}
 
 	public HashTable(int capacity, float loadFactor, OpenAddressType type) {
 		this.capacity = capacity;
 		this.loadFactor = loadFactor;
 		this.type = type;
+		this.hashTable = new HashObject<V>[];
+		this.frequency = new int[];
+		this.size = 0;
 	}
 
 	public void put(V value, int key) {
