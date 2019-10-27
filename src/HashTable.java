@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.NoSuchElementException;
 
 public class HashTable<V> {
 
@@ -57,7 +58,16 @@ public class HashTable<V> {
 	}
 
 	public V remove(V value, int key) {
-		return null;
+		HashObject<V> element = new HashObject<V>(value, key);
+		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
+			int index = getHash(key, this.numProbes);
+			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
+				this.hashTable[index] = null;
+				--this.size;
+				return value;
+			}
+		}
+		throw new NoSuchElementException();
 	}
 
 	public boolean contains(V value, int key) {
