@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class HashTable<V> {
 
 	private OpenAddressType type;
@@ -44,9 +46,13 @@ public class HashTable<V> {
 	public void put(V value, int key) {
 		if (this.size + 1 > this.maxSize)
 			throw new IllegalStateException();
-		HashObject<V> element = new HashObject<V>(value, key);
-		int index = this.probe(key);
-		this.hashTable[index] = element;
+		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
+			int index = getHash(key, this.numProbes);
+			if (this.hashTable[index] == null) {
+				this.hashTable[index] = new HashObject<V>(value, key);
+				break;
+			}
+		}
 		++this.size;
 	}
 
@@ -58,29 +64,17 @@ public class HashTable<V> {
 		return false;
 	}
 
-	private int probe(int key) {
-		int index = 0;
-		HashObject<V> element = null;
-		for (this.numProbes = 0; this.numProbes < this.capacity; ++numProbes) {
-			index = getHash(key, this.numProbes);
-			element = this.hashTable[index];
-			if (element == null)
-				break;
-		}
-		if (element != null)
-			return -1;
-		return index;
-	}
-
 	public void clear() {
 	}
 
 	public int getHash(int key, int numProbes) {
+		float c1 = (float)0.5;
+		float c2 = (float)0.5;
 		switch (this.type) {
 			case linear:
 				return (hash1(key) + numProbes) % this.capacity;
 			case quadratic:
-				return -1;
+				return (hash1(key) + (int)(c1 * numProbes) + (int)(c2 * Math.pow(numProbes, 2))) % this.capacity;
 			case doubleHashing:
 				return (hash1(key) + numProbes * hash2(key)) % this.capacity;
 			default:
