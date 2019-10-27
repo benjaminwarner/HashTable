@@ -46,7 +46,7 @@ public class HashTableTest_12b_C2_putD3_C2D3_75_13_double
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
-	private static final int EXPECTED_NUM_PROBES = 0; 
+	private static final int EXPECTED_NUM_PROBES = 2; 
 	// Frequency of lookup for invalid VALUE/KEY pair   
 	private static final int INVALID_EXPECTED_FREQUENCY = -1; 
 	// Maximum number of values in hash table for given load factor and capacity 

@@ -27,7 +27,7 @@ public class HashTableTest_10c_E4_removeE4_emptyHashTable_default
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
-	private static final int EXPECTED_NUM_PROBES = 0; 
+	private static final int EXPECTED_NUM_PROBES = 1; 
 	// Frequency of lookup for invalid VALUE/KEY pair   
 	private static final int INVALID_EXPECTED_FREQUENCY = -1; 
 	// Maximum number of values in hash table for given load factor and capacity 

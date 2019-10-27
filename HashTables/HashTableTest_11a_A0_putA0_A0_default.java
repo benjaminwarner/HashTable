@@ -29,7 +29,7 @@ public class HashTableTest_11a_A0_putA0_A0_default
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
-	private static final int EXPECTED_NUM_PROBES = 0; 
+	private static final int EXPECTED_NUM_PROBES = 2; 
 	// Frequency of lookup for valid VALUE/KEY pair   
 	private static final int VALID_EXPECTED_FREQUENCY = 1; 
 	// Frequency of lookup for invalid VALUE/KEY pair   
