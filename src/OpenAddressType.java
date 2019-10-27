@@ -1,5 +1,6 @@
 enum OpenAddressType {
 	linear,
 	quadratic,
-	doubleHashing
+	doubleHashing,
+	double_hash
 }

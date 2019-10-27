@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class HashTable<V> {
 
@@ -39,6 +40,8 @@ public class HashTable<V> {
 		this.type = type;
 		this.hashTable = new HashObject[this.capacity];
 		this.frequency = new int[this.capacity];
+		for (int i = 0; i < this.frequency.length; ++i)
+			this.frequency[i] = 0;
 		this.size = 0;
 		this.numProbes = 0;
 		this.maxSize = (int)(this.loadFactor * this.capacity);
@@ -47,8 +50,14 @@ public class HashTable<V> {
 	public void put(V value, int key) {
 		if (this.size + 1 > this.maxSize)
 			throw new IllegalStateException();
-		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
-			int index = getHash(key, this.numProbes);
+		HashObject<V> element = new HashObject<V>(value, key);
+		for (int i = 0; i < this.capacity; ++i) {
+			int index = getHash(key, i);
+			++this.numProbes;
+			if (this.hashTable[index] != null && Objects.equals(element, this.hashTable[index])) {
+				this.frequency[index] += 1;
+				return;
+			} 
 			if (this.hashTable[index] == null) {
 				this.hashTable[index] = new HashObject<V>(value, key);
 				break;
@@ -59,29 +68,37 @@ public class HashTable<V> {
 
 	public V remove(V value, int key) {
 		HashObject<V> element = new HashObject<V>(value, key);
-		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
-			int index = getHash(key, this.numProbes);
-			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
-				this.hashTable[index] = null;
-				--this.size;
-				return value;
-			}
+		int index = indexOf(value, key);
+		if (index != -1) {
+			this.hashTable[index] = null;
+			--this.size;
+			return value;
 		}
 		throw new NoSuchElementException();
 	}
 
 	public boolean contains(V value, int key) {
+		return indexOf(value, key) != -1;
+	}
+
+	private int indexOf(V value, int key) {
 		HashObject<V> element = new HashObject<V>(value, key);
-		for (this.numProbes = 0; this.numProbes < this.capacity; ++this.numProbes) {
-			int index = getHash(key, this.numProbes);
+		for (int i = 0; i < this.capacity; ++i) {
+			int index = getHash(key, i);
 			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
-				return true;
+				return index;
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	public void clear() {
+		for (int i = 0; i < this.capacity; ++i) {
+			this.hashTable[i] = null;
+			this.frequency[i] = 0;
+		}
+		this.numProbes = 0;
+		this.size = 0;
 	}
 
 	public int getHash(int key, int numProbes) {
@@ -92,6 +109,7 @@ public class HashTable<V> {
 				return (hash1(key) + numProbes) % this.capacity;
 			case quadratic:
 				return (hash1(key) + (int)(c1 * numProbes) + (int)(c2 * Math.pow(numProbes, 2))) % this.capacity;
+			case double_hash:
 			case doubleHashing:
 				return (hash1(key) + numProbes * hash2(key)) % this.capacity;
 			default:
@@ -137,11 +155,18 @@ public class HashTable<V> {
 	}
 
 	public int getFrequency(V value, int key) {
-		return 0;
+		int index = indexOf(value, key);
+		if (index != -1)
+			return this.frequency[index];
+		else
+			return -1;
 	}
 
 	public int getNumDuplicates() {
-		return 0;
+		int sum = 0;
+		for (int i = 0; i < this.frequency.length; ++i)
+			sum += this.frequency[i];
+		return sum;
 	}
 
 	public String toString() {
