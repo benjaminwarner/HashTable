@@ -36,7 +36,7 @@ public class HashObject<V> {
 		if (!(o instanceof HashObject))
 			return false;
 		HashObject h = (HashObject) o;
-		return h.getKey() == key && h.getValue() == value;
+		return h.getKey() == key && h.getValue().equals(value);
 	}
 
 	public int hashCode() {

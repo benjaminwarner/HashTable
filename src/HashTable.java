@@ -54,7 +54,7 @@ public class HashTable<V> {
 		for (int i = 0; i < this.capacity; ++i) {
 			int index = getHash(key, i);
 			++this.numProbes;
-			if (this.hashTable[index] != null && Objects.equals(element, this.hashTable[index])) {
+			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
 				this.frequency[index] += 1;
 				return;
 			} 
@@ -101,17 +101,17 @@ public class HashTable<V> {
 		this.size = 0;
 	}
 
-	public int getHash(int key, int numProbes) {
+	public int getHash(int key, int i) {
 		float c1 = (float)0.5;
 		float c2 = (float)0.5;
 		switch (this.type) {
 			case linear:
-				return (hash1(key) + numProbes) % this.capacity;
+				return (hash1(key) + i) % this.capacity;
 			case quadratic:
-				return (hash1(key) + (int)(c1 * numProbes) + (int)(c2 * Math.pow(numProbes, 2))) % this.capacity;
+				return (hash1(key) + (int)(c1 * i) + (int)(c2 * Math.pow(i, 2))) % this.capacity;
 			case double_hash:
 			case doubleHashing:
-				return (hash1(key) + numProbes * hash2(key)) % this.capacity;
+				return (hash1(key) + i * hash2(key)) % this.capacity;
 			default:
 				break;
 		}
