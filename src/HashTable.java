@@ -53,7 +53,6 @@ public class HashTable<V> {
 		HashObject<V> element = new HashObject<V>(value, key);
 		for (int i = 0; i < this.capacity; ++i) {
 			int index = getHash(key, i);
-			++this.numProbes;
 			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
 				this.frequency[index] += 1;
 				return;
@@ -62,6 +61,7 @@ public class HashTable<V> {
 				this.hashTable[index] = new HashObject<V>(value, key);
 				break;
 			}
+			++this.numProbes;
 		}
 		++this.size;
 	}
@@ -170,15 +170,12 @@ public class HashTable<V> {
 	}
 
 	public String toString() {
-		String s = "[";
-		for (int i = 0; i < this.capacity - 1; ++i) {
+		String s = "";
+		for (int i = 0; i < this.capacity; ++i) {
 			if (this.hashTable[i] == null)
-				s += "N/A, ";
-			else
-				s += this.hashTable[i].toString() + ", ";
+				continue;
+			s += String.format("table[%d]: %s %d\n", i, this.hashTable[i].getValue().toString(), this.frequency[i]);
 		}
-		s += this.hashTable[this.capacity - 1] == null ? "N/A" : this.hashTable[this.capacity - 1].toString();
-		s += "]";
 		return s;
 	}
 }

@@ -35,11 +35,11 @@ public class HashTest {
 			String[] data = line.split(" ");
 			String word = data[0].trim();
 			int key = Integer.parseInt(data[1]);
-			
+	
 			int linearProbesCurrent = linearTable.getNumProbes();
 			int doubleProbesCurrent = doubleTable.getNumProbes();
 			int quadraticProbesCurrent = quadraticTable.getNumProbes();
-
+		
 			linearTable.put(word, key);
 			doubleTable.put(word, key);
 			quadraticTable.put(word, key);
@@ -53,17 +53,23 @@ public class HashTest {
 		
 		System.out.println("Using Linear Probing...");
 		System.out.println(String.format("Inserted %d values with %d duplicates", insertCount, linearTable.getNumDuplicates()));
-		System.out.println(String.format("Average number of probes: %.3f", (double)linearProbes / (double)insertCount));
+		System.out.println(String.format("Average number of probes: %f", (double)linearTable.getNumProbes() / (double)insertCount));
+		if (debug)
+			System.out.println("\n" + linearTable.toString());
 
 		System.out.println("");
 		System.out.println("Using Double Hashing...");
 		System.out.println(String.format("Inserted %d values with %d duplicates", insertCount, doubleTable.getNumDuplicates()));
-		System.out.println(String.format("Average number of probes: %.3f", (double)doubleProbes / (double)insertCount));
+		System.out.println(String.format("Average number of probes: %f", (double)doubleProbes / (double)insertCount));
+		if (debug)
+			System.out.println("\n" + doubleTable.toString());
 
 		System.out.println("");
 		System.out.println("Using Quadratic Probing...");
 		System.out.println(String.format("Inserted %d values with %d duplicates", insertCount, quadraticTable.getNumDuplicates()));
-		System.out.println(String.format("Average number of probes: %.3f", (double)quadraticProbes / (double)insertCount));
+		System.out.println(String.format("Average number of probes: %f", (double)quadraticProbes / (double)insertCount));
+		if (debug)
+			System.out.println("\n" + quadraticTable.toString());
 	}
 
 	public static void usage() {
