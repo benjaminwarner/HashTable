@@ -110,7 +110,7 @@ public class TestCase
 			}
 			else if(hashType.equals("double"))
 			{
-				newHashTable = new HashTable<Character>(13, 0.75f, OpenAddressType.double_hash);
+				newHashTable = new HashTable<Character>(13, 0.75f, OpenAddressType.doubleHashing);
 			}
 			else
 			{

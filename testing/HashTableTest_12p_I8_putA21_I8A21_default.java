@@ -41,8 +41,6 @@ public class HashTableTest_12p_I8_putA21_I8A21_default
 			{TestCase.A21.getValue(), TestCase.A21.getKey(), 0} };	
 	// OpenAddressType for hash table  
 	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.linear; 
-	// Alpha (load factor) for hash table   
-	private static final float EXPECTED_ALPHA = 0.75f; 
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
@@ -55,6 +53,8 @@ public class HashTableTest_12p_I8_putA21_I8A21_default
 	private static final int EXPECTED_NUM_DUPLICATES = 0; 
 	// Number of objects in hash table
 	private static final int SIZE = 2;
+	// Alpha (load factor) for hash table   
+	private static final float EXPECTED_ALPHA = (float) SIZE / EXPECTED_CAPACITY; 
 	
 	//****** Constants used in tests *****************
 	// A value adding to table

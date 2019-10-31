@@ -102,6 +102,14 @@
       <class name="HashTableTest_12u_N13_putFG13_N13G13_75_13_double"/>
                 
     </classes>
-  </test> <!-- Hash Table Tests with Default Settings -->
+  </test> <!-- Hash Table Tests with alpha = 0.75, capacity = 13, using Double Hashing -->
+  
+  <test name="Hash Table Test for Tables without Quadratic Probing" verbose="2">
+    <classes>     
+      <class name="HashTableTest_quadratic"/>              
+    </classes>
+  </test> <!-- Hash Table Test for Tables without Quadratic Probing -->
+  
+  
    
 </suite> <!-- Hash Table Testing Suite -->

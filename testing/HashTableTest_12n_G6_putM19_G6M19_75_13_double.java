@@ -40,9 +40,7 @@ public class HashTableTest_12n_G6_putM19_G6M19_75_13_double
 	private static final Object[][] VALID_FREQUENCIES = { {TestCase.G6.getValue(), TestCase.G6.getKey(), 0}, 
 			{TestCase.M19.getValue(), TestCase.M19.getKey(), 0} };	
 	// OpenAddressType for hash table  
-	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.double_hash; 
-	// Alpha (load factor) for hash table   
-	private static final float EXPECTED_ALPHA = 0.75f; 
+	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.doubleHashing; 
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
@@ -55,7 +53,9 @@ public class HashTableTest_12n_G6_putM19_G6M19_75_13_double
 	private static final int EXPECTED_NUM_DUPLICATES = 0; 
 	// Number of objects in hash table
 	private static final int SIZE = 2;
-	
+	// Alpha (load factor) for hash table   
+	private static final float EXPECTED_ALPHA = (float) SIZE / EXPECTED_CAPACITY; 
+
 	//****** Constants used in tests *****************
 	// A value adding to table
 	private static final Character NEW_VALUE = TestCase.Y0.getValue(); 

@@ -22,8 +22,6 @@ public class HashTableTest_10b_C2_removeC2_emptyHashTable_default
 	private static final int VALID_KEY = TestCase.C2.getKey(); 
 	// OpenAddressType for hash table  
 	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.linear; 
-	// Alpha (load factor) for hash table   
-	private static final float EXPECTED_ALPHA = 0.75f; 
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
@@ -38,7 +36,9 @@ public class HashTableTest_10b_C2_removeC2_emptyHashTable_default
 	private static final int ATTEMPTS = 0; 
 	// Number of objects in hash table
 	private static final int SIZE = 0;
-	
+	// Alpha (load factor) for hash table   
+	private static final float EXPECTED_ALPHA = (float) SIZE / EXPECTED_CAPACITY; 
+
 	//****** Constants used in tests *****************
 	// A value adding to table
 	private static final Character NEW_VALUE = TestCase.Y0.getValue(); 

@@ -23,9 +23,7 @@ public class HashTableTest_11c_G6_putG6_G6_75_13_double
 	// Hash of valid value with default parameters and 0 prior attempts  
 	private static final int EXPECTED_HASH = 6; 
 	// OpenAddressType for hash table  
-	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.double_hash; 
-	// Alpha (load factor) for hash table   
-	private static final float EXPECTED_ALPHA = 0.75f; 
+	private static final OpenAddressType EXPECTED_TYPE = OpenAddressType.doubleHashing; 
 	// Capacity of the hash table 
 	private static final int EXPECTED_CAPACITY = 13; 
 	// Number of probes made   
@@ -42,6 +40,8 @@ public class HashTableTest_11c_G6_putG6_G6_75_13_double
 	private static final int ATTEMPTS = 0; 
 	// Number of objects in hash table
 	private static final int SIZE = 1;
+	// Alpha (load factor) for hash table   
+	private static final float EXPECTED_ALPHA = (float) SIZE / EXPECTED_CAPACITY; 
 	
 	//****** Constants used in tests *****************
 	// A value adding to table
