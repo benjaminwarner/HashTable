@@ -85,6 +85,7 @@ public class HashTable<V> {
 		HashObject<V> element = new HashObject<V>(value, key);
 		for (int i = 0; i < this.capacity; ++i) {
 			int index = getHash(key, i);
+			++this.numProbes;
 			if (this.hashTable[index] != null && this.hashTable[index].equals(element)) {
 				this.frequency[index] += 1;
 				return;
@@ -93,7 +94,6 @@ public class HashTable<V> {
 				this.hashTable[index] = new HashObject<V>(value, key);
 				break;
 			}
-			++this.numProbes;
 		}
 		++this.size;
 	}
@@ -110,6 +110,7 @@ public class HashTable<V> {
 		int index = indexOf(value, key);
 		if (index != -1) {
 			this.hashTable[index] = null;
+			this.frequency[index] = 0;
 			--this.size;
 			return value;
 		}
@@ -210,7 +211,7 @@ public class HashTable<V> {
 	 * @return float
 	 */
 	public float getLoadFactor() {
-		return loadFactor;
+		return (float)this.size / (float)this.capacity;
 	}
 
 	/**
