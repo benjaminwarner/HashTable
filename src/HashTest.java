@@ -21,7 +21,7 @@ public class HashTest {
 		boolean debug = (args.length == 5 && Integer.parseInt(args[4]) == 1) ? true : false;
 
 		HashTable<String> linearTable = new HashTable<String>(capacity, loadFactor, OpenAddressType.linear);
-		HashTable<String> doubleTable = new HashTable<String>(capacity, loadFactor, OpenAddressType.double_hash);
+		HashTable<String> doubleTable = new HashTable<String>(capacity, loadFactor, OpenAddressType.doubleHashing);
 		HashTable<String> quadraticTable = new HashTable<String>(capacity, loadFactor, OpenAddressType.quadratic);
 
 		int linearProbes = 0;

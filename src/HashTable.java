@@ -173,7 +173,6 @@ public class HashTable<V> {
 				return (hash1(key) + i) % this.capacity;
 			case quadratic:
 				return (hash1(key) + (int)(c1 * i) + (int)(c2 * Math.pow(i, 2))) % this.capacity;
-			case double_hash:
 			case doubleHashing:
 				return (hash1(key) + i * hash2(key)) % this.capacity;
 			default:
